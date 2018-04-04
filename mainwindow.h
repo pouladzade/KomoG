@@ -37,6 +37,7 @@ protected:
     void resizeEvent(QResizeEvent *event);
     void installing(bool isInstalling, int exitCode = 0);
     bool showMessage(QString message);
+    void showEvent(QShowEvent *event);
 protected slots:
     void PrintOutPut();
 

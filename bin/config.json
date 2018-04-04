@@ -3,6 +3,7 @@
     "shell_name":"bash",
     "process_id_command":"pidof",
     "log_viewer_command":"less",
+    "log_viewer_params" :["+F"],
     
 
     "programs": [
@@ -33,7 +34,7 @@
     "kill_script":"./bin/kill-komodo",
     "log_1":"$HOME/.komodo/debug.log",
     "log_2":"$HOME/.komodo/komodo.conf",
-    "log_3":"$HOME/.komodo/LOG",
+    "log_3":"$HOME/.komodo/chainstat/LOG",
     "log_4":"$HOME/.komodo/blocks/index/LOG"
     },
     {

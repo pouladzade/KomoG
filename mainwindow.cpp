@@ -18,13 +18,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Config::getInstance()->LoadConfig();
-    initializePrograms();
+
+
+
     KomodoStarted = false;
     ui->privKeyLineEdit->setEchoMode(QLineEdit::Password);
     ui->privKeyLineEdit->setInputMethodHints(Qt::ImhHiddenText| Qt::ImhNoPredictiveText|Qt::ImhNoAutoUppercase);
     setLayout(ui->gridLayout);
 
+}
+
+void MainWindow::showEvent(QShowEvent* event)
+{
+    initializePrograms();
 }
 
 MainWindow::~MainWindow()
@@ -60,23 +66,23 @@ void MainWindow::on_actionBarterDEX_triggered()
     monitor->setWindowTitle(Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].name);
     auto programs = monitor->getPrograms();
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_1,
-                               "tail",
-                               QStringList() << "-f"<< Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_1,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params)<< Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_1,
                                ProcessKey::IDE_PROCESS_MONITORING_UP_LEFT));
 
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_2,
-                               "less",
-                               QStringList() <<  Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_2,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params) <<  Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_2,
                                ProcessKey::IDE_PROCESS_MONITORING_UP_RIGHT));
 
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_3,
-                               "tail",
-                               QStringList() << "-f"<< Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_3,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params)<< Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_3,
                                ProcessKey::IDE_PROCESS_MONITORING_DOWN_LEFT));
 
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_4,
-                               "less",
-                               QStringList() <<  Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_4,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params)<<  Config::getInstance()->DataModel.apps_config[BARTERDEX_CONFIG_INDEX].log_4,
                                ProcessKey::IDE_PROCESS_MONITORING_DOWN_RIGHT));
 
     //Specially for process monitoring
@@ -98,23 +104,23 @@ void MainWindow::on_actionKomodo_triggered()
     monitor->setWindowTitle(Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].name);
     auto programs = monitor->getPrograms();
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_1,
-                               "tail",
-                               QStringList() << "-f"<< Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_1 ,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params)<< Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_1 ,
                                ProcessKey::IDE_PROCESS_MONITORING_UP_LEFT));
 
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_2,
-                               "less",
-                               QStringList() << Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_2 ,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params) << Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_2 ,
                                ProcessKey::IDE_PROCESS_MONITORING_UP_RIGHT));
 
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_3,
-                               "tail",
-                               QStringList() << "-f"<< Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_3 ,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params)<< Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_3 ,
                                ProcessKey::IDE_PROCESS_MONITORING_DOWN_LEFT));
 
-    programs->push_back(Program(Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_1,
-                               "less",
-                               QStringList() << "+F"<< Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_4 ,
+    programs->push_back(Program(Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_4,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params)<< Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].log_4 ,
                                ProcessKey::IDE_PROCESS_MONITORING_DOWN_RIGHT));
 
     //Specially for process monitoring
@@ -135,22 +141,22 @@ void MainWindow::on_actionAgama_triggered()
     monitor->setWindowTitle("Agama");
     auto programs = monitor->getPrograms();
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[AGAMA_CONFIG_INDEX].log_1,
-                               "tail",
-                               QStringList() << "-f" <<  Config::getInstance()->DataModel.apps_config[AGAMA_CONFIG_INDEX].log_1,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params)<<  Config::getInstance()->DataModel.apps_config[AGAMA_CONFIG_INDEX].log_1,
                                ProcessKey::IDE_PROCESS_MONITORING_UP_LEFT));
 
     programs->push_back(Program(Config::getInstance()->DataModel.apps_config[AGAMA_CONFIG_INDEX].log_2,
-                               "less",
-                               QStringList()  <<  Config::getInstance()->DataModel.apps_config[AGAMA_CONFIG_INDEX].log_2,
+                               Config::getInstance()->DataModel.log_viewer_command,
+                               QStringList(Config::getInstance()->DataModel.log_viewer_params)  <<  Config::getInstance()->DataModel.apps_config[AGAMA_CONFIG_INDEX].log_2,
                                ProcessKey::IDE_PROCESS_MONITORING_UP_RIGHT));
 
     programs->push_back(Program("Agama processes",
-                               "pidof",
+                               Config::getInstance()->DataModel.process_id_command,
                                QStringList()  <<  Config::getInstance()->DataModel.apps_config[AGAMA_CONFIG_INDEX].process_name,
                                ProcessKey::IDE_PROCESS_MONITORING_DOWN_LEFT));
 
     programs->push_back(Program("Komodod processes",
-                               "pidof",
+                               Config::getInstance()->DataModel.process_id_command,
                                QStringList()  << Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].process_name  ,
                                ProcessKey::IDE_PROCESS_MONITORING_DOWN_RIGHT));
 

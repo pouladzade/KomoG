@@ -2,6 +2,7 @@
 #define CONFIG_H
 
 #include <QString>
+#include<QStringList>
 #include <vector>
 
 #define AGAMA_CONFIG_INDEX          0
@@ -9,6 +10,7 @@
 #define BARTERDEX_CONFIG_INDEX      2
 #define KOMODO_CLI_CONFIG_INDEX     0
 #define MARKETMAKER_CONFIG_INDEX    1
+#define JASON_CONFIG_PATH           "./bin/config.json"
 
 using namespace std;
 
@@ -45,6 +47,8 @@ struct ConfigDataModel
     QString os;
     QString shell_name;
     QString process_id_command;
+    QString log_viewer_command;
+    QStringList log_viewer_params;
     std::vector<Apps> apps_config;
     std::vector<CLI>  clis_conifg;
 

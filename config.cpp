@@ -5,7 +5,8 @@
 #include<qjsonarray.h>
 #include<qjsondocument.h>
 #include<QDir>
-
+#include<QMessageBox>
+#include<QCoreApplication>
 
 Config* Config::JsonConfig = nullptr;
 ConfigDataModel Config::DataModel;
@@ -25,16 +26,19 @@ Config *Config::getInstance()
 }
 
 bool Config::LoadConfig()
-{
-    QString path = "./bin/config.json";
-    QFile loadFile(path);
+{    
+    QFile loadFile(JASON_CONFIG_PATH);
 
     if (!loadFile.open(QIODevice::ReadOnly))
     {
-        qWarning("Couldn't open file.");
+        QMessageBox::question(nullptr,
+                            "Error",
+                            "Can not find config.json in bin directory!",
+                            QMessageBox::Close);
         return false;
     }
-
+    DataModel.apps_config.reserve(3);
+    DataModel.clis_conifg.reserve(2);
     QByteArray jsonData = loadFile.readAll();
 
     QJsonDocument loadDoc(QJsonDocument::fromJson(jsonData));
@@ -49,6 +53,15 @@ bool Config::LoadConfig()
 
     if (obj.contains("process_id_command") && obj["process_id_command"].isString())
             DataModel.process_id_command = obj["process_id_command"].toString();
+
+    if (obj.contains("log_viewer_command") && obj["log_viewer_command"].isString())
+            DataModel.log_viewer_command = obj["log_viewer_command"].toString();
+
+    if (obj.contains("log_viewer_params") && obj["log_viewer_params"].isArray()) {
+        QJsonArray params = obj["log_viewer_params"].toArray();
+        for (size_t i = 0; i < params.size(); ++i)
+            DataModel.log_viewer_params << params[i].toString();
+    }
 
     if (obj.contains("programs") && obj["programs"].isArray()) {
         QJsonArray apps = obj["programs"].toArray();
