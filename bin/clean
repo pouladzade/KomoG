@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd ~
+
+mv ./.komodo/komodo.conf  ./komodo.conf
+
+echo "Deleting Komodo blocks and other stuff . . . . "
+rm -rf .komodo
+
+mkdir .komodo
+
+mv   ./komodo.conf  ./.komodo/komodo.conf

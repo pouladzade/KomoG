@@ -1,0 +1,76 @@
+{
+    "os":"linux",
+    "shell_name":"bash",
+    "process_id_command":"pidof",
+    "log_viewer_command":"less",
+    
+
+    "programs": [
+    {
+        "name":"agama",
+        "process_name":"Agama",
+        "program_path":"",
+        "description": "Agama Wallet Desktop App",
+        "monitoring_script": "ag-ps",
+        "working_dir":"$HOME/.agama",
+        "install_script": "",
+        "uninstall_script":"",
+        "kill_script":"",
+        "log_1":"$HOME/.agama/komodod.log",
+        "log_2":"$HOME/.agama/config.json",
+        "log_3":"",        
+        "log_4":""
+    },
+    {
+    "name":"komodo",
+    "process_name":"komodod",
+    "program_path":"./komodo/src/komodod",
+    "description": "Komodo full blockchain",
+    "monitoring_script": "km-ps",
+    "working_dir":"$HOME/.komodo",
+    "install_script": "./bin/install",
+    "uninstall_script":"./bin/uninstall",
+    "kill_script":"./bin/kill-komodo",
+    "log_1":"$HOME/.komodo/debug.log",
+    "log_2":"$HOME/.komodo/komodo.conf",
+    "log_3":"$HOME/.komodo/LOG",
+    "log_4":"$HOME/.komodo/blocks/index/LOG"
+    },
+    {
+    "name":"BarterDex",
+    "process_name":"BarterDEX",
+    "program_path":"",
+    "description": "BarterDEX decentralized exchange",
+    "monitoring_script": "brdex-ps",
+    "working_dir":"$HOME/BarterDEX",
+    "install_script": "",
+    "uninstall_script":"",
+    "kill_script":"",
+    "log_1":"$HOME/BarterDEX/logFile.log",
+    "log_2":"$HOME/BarterDEX/settings.json",
+    "log_3":"$HOME/BarterDEX/stats.log",
+    "log_4":"$HOME/BarterDEX/coins.json"
+    }
+    ],
+    "CLI_Command":[
+        {
+            "name":"komodo-cli",
+            "program_path":"./komodo/src/komodo-cli",
+            "commands_file":"./bin/cli-commands",
+            "description": "Interface to the komodod",
+            "install_script": "",
+            "uninstall_script":"",
+            "kill_script":""
+
+        },
+        {
+            "name":"marketmaker-cli",
+            "program_path":"./marketmaker-cli",
+            "commands_file":"./bin/mmcli-commands",
+            "description": "Komodo market maker",
+            "install_script": "",
+            "uninstall_script":"",
+            "kill_script":""
+        }
+    ]
+}

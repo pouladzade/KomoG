@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Deleting source code . . . . "
+rm -rf  ../komodo
+
+sleep 1
+
+cd ~
+
+echo "Deleting Komodo blocks and other stuff . . . . "
+rm -r .komodo
+
+
+
+

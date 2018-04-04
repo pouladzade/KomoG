@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/agama_app_icon.ico</file>
+        <file>icons/barterdex.ico</file>
+        <file>icons/jumblr.png</file>
+        <file>icons/komodo.png</file>
+        <file>icons/Coin.png</file>
+        <file>icons/komodo-128.png</file>
+        <file>icons/clean.ico</file>
+        <file>icons/install.png</file>
+        <file>icons/Uninstall.png</file>
+        <file>icons/info.png</file>
+        <file>icons/app.png</file>
+        <file>icons/cli.png</file>
+        <file>icons/mmcli.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+#!/bin/bash
+while [ 1 == 1 ]
+do
+    ps -C BarterDEX -o %cpu,%mem,cmd
+    sleep 2
+done

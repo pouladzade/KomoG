@@ -1,0 +1,23 @@
+#!/bin/bash
+
+gksu apt-get install build-essential pkg-config libcurl3-gnutls-dev libc6-dev libevent-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git python zlib1g-dev wget bsdmainutils automake libboost-all-dev libssl-dev libprotobuf-dev protobuf-compiler libqt4-dev libqrencode-dev libdb++-dev ntp ntpdate
+mkdir ~/.komodo
+cp ./bin/komodo.conf ~/.komodo/komodo.conf
+
+git clone https://github.com/KomodoPlatform/komodo.git
+
+sleep 1
+
+cd komodo
+
+./zcutil/fetch-params.sh
+
+sleep 1
+# -j8 uses 8 threads - replace 8 with number of threads you want to use
+./zcutil/build.sh -j8
+
+
+
+
+
+
