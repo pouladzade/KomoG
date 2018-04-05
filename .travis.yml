@@ -22,9 +22,9 @@ script:
   - cp ./usr/share/icons/hicolor/48x48/apps/*.png .
   - cd .. 
   - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" 
-  - chmod a+x linuxdeployqt*.AppImage
+  - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
   - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
-  - ./linuxdeployqt*.AppImage ./appdir/usr/bin/* -bundle-non-qt-libs -qmldir=$(readlink -f /opt/qt5*/qml/)
-  - ./linuxdeployqt*.AppImage ./appdir/usr/bin/* -appimage -qmldir=$(readlink -f /opt/qt5*/qml/)
+  - ./linuxdeployqt-continuous-x86_64.AppImage ./appdir/usr/bin/* -bundle-non-qt-libs -qmldir=$(readlink -f /opt/qt5*/qml/)
+  - ./linuxdeployqt-continuous-x86_64.AppImage ./appdir/usr/bin/* -appimage -qmldir=$(readlink -f /opt/qt5*/qml/)
   - find ./appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq
   # - curl --upload-file ./APPNAME*.AppImage https://transfer.sh/APPNAME-git.$(git rev-parse --short HEAD)-x86_64.AppImage 
