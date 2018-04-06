@@ -33,7 +33,8 @@ SOURCES += \
     komodocli.cpp \
     clicommand.cpp \
     cligui.cpp \
-    config.cpp
+    config.cpp \
+    utility.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,7 +45,8 @@ HEADERS += \
     komodocli.h \
     clicommand.h \
     cligui.h \
-    config.h
+    config.h \
+    utility.h
 
 FORMS += \
         mainwindow.ui \

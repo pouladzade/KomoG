@@ -1,6 +1,7 @@
 #include "cligui.h"
 #include "komodocli.h"
 #include "ui_cligui.h"
+#include "utility.h"
 #include<qmessagebox.h>
 #include<qscrollbar.h>
 #include<QKeyEvent>
@@ -33,6 +34,7 @@ void CliGui::showEvent(QShowEvent* event)
     loadCommands();
 
 }
+
 CliGui::~CliGui()
 {
     delete ui;
@@ -49,6 +51,13 @@ void CliGui::on_applyButton_clicked()
 {
     QStringList argList;
     QString programName = getProgramName();
+    if(!Utility::fileExists(getProgramName()))
+    {
+        QMessageBox::question(nullptr,
+                              "Error",
+                              "Can not find  \"" + getProgramName() + "\"",
+                              QMessageBox::Close);
+    }
     if(Process)
     {
         Process->kill();
@@ -198,7 +207,6 @@ void CliGui::processFinished(int exitCode)
 
 void CliGui::keyPressEvent(QKeyEvent *event) // definition
 {
-
     event->accept();
 
     QWidget::keyPressEvent(event);

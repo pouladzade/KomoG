@@ -1,17 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <qmessagebox.h>
+#include <QMessageBox>
 #include<QContextMenuEvent>
 #include"monitor.h"
 #include"coinissuer.h"
 #include <QDir>
-#include<QTime>
 #include"program.h"
 #include<QScrollBar>
 #include<QResizeEvent>
 #include<math.h>
 #include"cligui.h"
 #include"config.h"
+#include "utility.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -45,19 +45,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
     for(QWidget *dialog : Dialogs)
     {
         dialog->close();
-        delay(100);
+        Utility::delay(100);
         delete dialog;
     }
     event->accept();
-}
-
-void MainWindow::delay( int millisecondsToWait )
-{
-    QTime dieTime = QTime::currentTime().addMSecs( millisecondsToWait );
-    while( QTime::currentTime() < dieTime )
-    {
-        QCoreApplication::processEvents( QEventLoop::AllEvents, 100 );
-    }
 }
 
 void MainWindow::on_actionBarterDEX_triggered()
@@ -186,6 +177,13 @@ void MainWindow::on_actionCoinIssuer_triggered()
 
 void MainWindow::on_startButton_clicked()
 {
+    if(!Utility::fileExists(Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].program_path))
+    {
+        QMessageBox::question(nullptr,
+                              "Error",
+                              "Can not find" + Config::getInstance()->DataModel.apps_config[KOMODO_CONFIG_INDEX].program_path,
+                              QMessageBox::Close);
+    }
     if(KomodoStarted)
     {
         if(execute(ProcessKey::IDE_PROCESS_KOMODOD_STOP))
@@ -526,14 +524,14 @@ void MainWindow::on_actionInstall_triggered()
 }
 
 void MainWindow::on_actionUninstall_triggered()
-{
-    if(showMessage("Are you sure you want to Uninstall Komodo?"))
+{    
+    if(Utility::showMessage("Are you sure you want to Uninstall Komodo?"))
     execute(ProcessKey::IDE_PROCESS_UNINSTALL_KOMODO);
 }
 
 void MainWindow::on_actionCleanKomodo_triggered()
 {
-    if(showMessage("Are you sure you want to delete all the komodo's data?"))
+    if(Utility::showMessage("Are you sure you want to delete all the komodo's data?"))
         execute(ProcessKey::IDE_PROCESS_CLEAN_KOMODO);
 }
 
@@ -542,14 +540,7 @@ void MainWindow::on_actionGetInfo_triggered()
     execute(ProcessKey::IDE_PROCESS_GET_INFO);
 }
 
-bool MainWindow::showMessage(QString message)
-{
-      return QMessageBox::question(this,
-                                    "Warning",
-                                    message,
-                                    QMessageBox::Yes|QMessageBox::No)
-                                    == QMessageBox::Yes;
-}
+
 
 void MainWindow::on_actionKomodo_CLI_triggered()
 {
@@ -569,3 +560,5 @@ void MainWindow::on_actionMarketMaker_triggered()
     marketMaker->show();
     Dialogs.insert(marketMaker);
 }
+
+

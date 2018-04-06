@@ -27,20 +27,18 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-protected:
-    void delay(int millisecondsToWait);
+protected:   
     void closeEvent(QCloseEvent *event);
     Program *getProgram(ProcessKey key);
     Program *removeProcess(ProcessKey key);
     bool execute(ProcessKey key);
     void findTextBrowser(ProcessKey processKey, QTextBrowser *&textBrowser);
     void resizeEvent(QResizeEvent *event);
-    void installing(bool isInstalling, int exitCode = 0);
-    bool showMessage(QString message);
+    void installing(bool isInstalling, int exitCode = 0);    
     void showEvent(QShowEvent *event);
+
 protected slots:
     void PrintOutPut();
-
     void PrintError();
     void processFinished(int exitCode);
 
